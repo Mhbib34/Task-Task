@@ -1,6 +1,6 @@
 import { BackgroundBeams } from "../components/ui/background-beams";
-import Button from "../components/common/Button";
-import { ArrowRight } from "lucide-react";
+import ButtonNext from "../components/fragment/ButtonNext";
+import { assetsAvatar } from "../assets/assets";
 
 const Home = () => {
   return (
@@ -13,15 +13,11 @@ const Home = () => {
           </p>
         </div>
         <div className=" flex justify-between w-full items-center">
-          <h2 className="font-bold text-xl bg-clip-text text-transparent bg-gradient-to-br from-primary to-tertiary via-secondary animate-text">
+          <h2 className="font-bold text-xl bg-clip-text text-transparent bg-gradient-to-br from-primary to-tertiary via-secondary animate-text flex items-center justify-center gap-2">
             Task-Task
+            <img src={assetsAvatar.logo} alt="" className="w-8 h-8" />
           </h2>
-          <Button
-            className="px-4 py-2 bg-gray-900 flex items-center rounded-full  gap-1 text-primary"
-            text="Get Started"
-          >
-            <ArrowRight className="text-sm" />
-          </Button>
+          <ButtonNext />
         </div>
       </div>
     </BackgroundBeams>
