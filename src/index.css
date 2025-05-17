@@ -1,1 +1,36 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+html {
+  scroll-behavior: smooth;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.animate-text {
+  background-size: 200% 200%;
+  animation: text-gradient 10s linear infinite;
+}
+
+@keyframes text-gradient {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+@theme {
+  --color-primary: #18ccfc;
+  --color-secondary: #6344f5;
+  --color-tertiary: #ae48ff;
+}
