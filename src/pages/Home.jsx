@@ -17,7 +17,7 @@ const Home = () => {
             Task-Task
             <img src={assetsAvatar.logo} alt="" className="w-8 h-8" />
           </h2>
-          <ButtonNext text="Get Started" />
+          <ButtonNext text="Get Started" href="/avatar" />
         </div>
       </div>
     </BackgroundBeams>

@@ -33,7 +33,7 @@ const Avatar = () => {
           onClick={() => handleAvatarClick(assetsAvatar.av3)}
         />
       </div>
-      <ButtonNext text="Next" />
+      <ButtonNext text="Next" href="/main" />
     </div>
   );
 };

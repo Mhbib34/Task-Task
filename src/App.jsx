@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Home from "./pages/Home";
 import Avatar from "./pages/Avatar";
 import SplashScreen from "./components/layout/SplashScreen";
+import Main from "./pages/Main";
 
 function App() {
   const [showSplash, setShowSplash] = useState(false);
@@ -29,6 +30,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/avatar" element={<Avatar />} />
+        <Route path="/main" element={<Main />} />
       </Routes>
     </Router>
   );
