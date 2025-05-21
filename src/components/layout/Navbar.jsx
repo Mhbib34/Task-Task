@@ -10,14 +10,14 @@ const Navbar = () => {
   return (
     <div className="flex justify-between items-center">
       <div onClick={() => setIsOpen(true)} className="cursor-pointer">
-        <i className="fa-solid fa-bars text-2xl text-white "></i>
+        <i className="fa-solid fa-bars text-2xl text-primary hover:opacity-80 transition-all duration-200 ease-in-out "></i>
       </div>
       <AvatarImage image={avatar} className="w-10 h-10" />
       <AnimatePresence>
         {isOpen && (
           <>
             <motion.div
-              className="fixed inset-0  bg-opacity-50 z-40"
+              className="fixed inset-0 bg-opacity-50 z-40"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -29,11 +29,11 @@ const Navbar = () => {
               initial={{ x: "-100%" }}
               animate={{ x: 0 }}
               exit={{ x: "-100%" }}
-              transition={{ type: "tween", duration: 0.3 }}
+              transition={{ type: "tween", duration: 0.4 }}
             >
               <i
                 onClick={() => setIsOpen(false)}
-                className="fa-solid fa-xmark text-2xl text-white cursor-pointer absolute top-4 right-4"
+                className="fa-solid fa-xmark text-2xl  cursor-pointer absolute top-4 right-4 text-primary hover:opacity-80 transition-all duration-200 ease-in-out "
               ></i>
               {/* Konten sidebar di sini */}
             </motion.div>
