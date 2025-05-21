@@ -19,16 +19,19 @@ const Avatar = () => {
       <div className="flex gap-3">
         <AvatarImage
           image={assetsAvatar.av1}
+          className="h-20 w-20"
           isSelected={selectedAvatar === assetsAvatar.av1}
           onClick={() => handleAvatarClick(assetsAvatar.av1)}
         />
         <AvatarImage
           image={assetsAvatar.av2}
+          className="h-20 w-20"
           isSelected={selectedAvatar === assetsAvatar.av2}
           onClick={() => handleAvatarClick(assetsAvatar.av2)}
         />
         <AvatarImage
           image={assetsAvatar.av3}
+          className="h-20 w-20"
           isSelected={selectedAvatar === assetsAvatar.av3}
           onClick={() => handleAvatarClick(assetsAvatar.av3)}
         />
