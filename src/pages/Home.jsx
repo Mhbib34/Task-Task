@@ -1,6 +1,6 @@
 import { BackgroundBeams } from "../components/ui/background-beams";
 import ButtonNext from "../components/fragment/ButtonNext";
-import { assetsAvatar } from "../assets/assets";
+import Logo from "../components/fragment/Logo";
 
 const Home = () => {
   return (
@@ -13,10 +13,7 @@ const Home = () => {
           </p>
         </div>
         <div className=" flex justify-between w-full items-center">
-          <h2 className="font-bold text-xl bg-clip-text text-transparent bg-gradient-to-br from-primary to-tertiary via-secondary animate-text flex items-center justify-center gap-2">
-            Task-Task
-            <img src={assetsAvatar.logo} alt="" className="w-8 h-8" />
-          </h2>
+          <Logo />
           <ButtonNext text="Get Started" href="/avatar" />
         </div>
       </div>

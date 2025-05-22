@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import AvatarImage from "../fragment/AvatarImage";
 /* eslint-disable */
 import { motion, AnimatePresence } from "framer-motion";
+import Logo from "../fragment/Logo";
+import SearchForm from "../common/SearchForm";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,6 +13,9 @@ const Navbar = () => {
     <div className="flex justify-between items-center">
       <div onClick={() => setIsOpen(true)} className="cursor-pointer">
         <i className="fa-solid fa-bars text-2xl text-primary hover:opacity-80 transition-all duration-200 ease-in-out "></i>
+      </div>
+      <div className="sm:block hidden">
+        <SearchForm />
       </div>
       <AvatarImage image={avatar} className="w-10 h-10" />
       <AnimatePresence>
@@ -31,11 +36,14 @@ const Navbar = () => {
               exit={{ x: "-100%" }}
               transition={{ type: "tween", duration: 0.4 }}
             >
-              <i
-                onClick={() => setIsOpen(false)}
-                className="fa-solid fa-xmark text-2xl  cursor-pointer absolute top-4 right-4 text-primary hover:opacity-80 transition-all duration-200 ease-in-out "
-              ></i>
-              {/* Konten sidebar di sini */}
+              <div className="flex justify-between items-center ">
+                <Logo />
+                <i
+                  onClick={() => setIsOpen(false)}
+                  className="fa-solid fa-xmark text-2xl  cursor-pointer  text-primary hover:opacity-80 transition-all duration-200 ease-in-out "
+                ></i>
+                {/* Konten sidebar di sini */}
+              </div>
             </motion.div>
           </>
         )}

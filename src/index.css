@@ -1,5 +1,12 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+
+@theme {
+  --color-primary: #18ccfc;
+  --color-secondary: #6344f5;
+  --color-tertiary: #ae48ff;
+}
+
 html {
   scroll-behavior: smooth;
   ::-webkit-scrollbar {
@@ -27,10 +34,4 @@ html {
   100% {
     background-position: 0% 0%;
   }
-}
-
-@theme {
-  --color-primary: #18ccfc;
-  --color-secondary: #6344f5;
-  --color-tertiary: #ae48ff;
 }

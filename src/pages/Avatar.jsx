@@ -1,12 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AvatarImage from "../components/fragment/AvatarImage";
 import { assetsAvatar } from "../assets/assets";
 import ButtonNext from "../components/fragment/ButtonNext";
+import Swal from "sweetalert2";
 
 const Avatar = () => {
   const [selectedAvatar, setSelectedAvatar] = useState(() =>
     localStorage.getItem("avatar")
   );
+  // eslint-disable-next-line
+  const [name, setName] = useState("");
+  const inputName = async () => {
+    const { value: name } = await Swal.fire({
+      title: "Tell me your name",
+      input: "text",
+      inputPlaceholder: "Enter your beautiful name",
+      confirmButtonColor: "#6344f5",
+    });
+    if (name) {
+      setName(name);
+      localStorage.setItem("name", name);
+    }
+  };
+  useEffect(() => {
+    inputName();
+  }, []);
 
   const handleAvatarClick = (image) => {
     localStorage.setItem("avatar", image);
