@@ -9,7 +9,7 @@ const SearchForm = () => {
         name=""
         id=""
         className="px-3 focus:outline-none placeholder:text-primary w-full text-primary"
-        placeholder="Search Task"
+        placeholder="Search Task Title"
       />
     </div>
   );

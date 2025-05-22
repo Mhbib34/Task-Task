@@ -10,7 +10,7 @@ const Navbar = () => {
   const avatar = localStorage.getItem("avatar");
 
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex justify-between items-center pr-5 sm:pr-10">
       <div onClick={() => setIsOpen(true)} className="cursor-pointer">
         <i className="fa-solid fa-bars text-2xl text-primary hover:opacity-80 transition-all duration-200 ease-in-out "></i>
       </div>
