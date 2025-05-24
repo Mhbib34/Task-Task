@@ -3,7 +3,7 @@ import AvatarImage from "../fragment/AvatarImage";
 /* eslint-disable */
 import { motion, AnimatePresence } from "framer-motion";
 import Logo from "../fragment/Logo";
-import SearchForm from "../common/SearchForm";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,9 +13,6 @@ const Navbar = () => {
     <div className="flex justify-between items-center pr-5 sm:pr-10">
       <div onClick={() => setIsOpen(true)} className="cursor-pointer">
         <i className="fa-solid fa-bars text-2xl text-primary hover:opacity-80 transition-all duration-200 ease-in-out "></i>
-      </div>
-      <div className="sm:block hidden">
-        <SearchForm />
       </div>
       <AvatarImage image={avatar} className="w-10 h-10" />
       <AnimatePresence>
@@ -43,6 +40,32 @@ const Navbar = () => {
                   className="fa-solid fa-xmark text-2xl  cursor-pointer  text-primary hover:opacity-80 transition-all duration-200 ease-in-out "
                 ></i>
                 {/* Konten sidebar di sini */}
+              </div>
+              <div className="text-primary mt-10 flex flex-col gap-2 font-medium ">
+                <Link
+                  to="/main"
+                  className="py-2 border-b-2 hover:border-primary border-black transition-all duration-200 ease-in-out"
+                >
+                  Home
+                </Link>
+                <Link
+                  to="/todo"
+                  className="py-2 border-b-2 hover:border-primary border-black transition-all duration-200 ease-in-out"
+                >
+                  Add Todo
+                </Link>
+                <Link
+                  to="/progress"
+                  className="py-2 border-b-2 hover:border-primary border-black transition-all duration-200 ease-in-out"
+                >
+                  Progress
+                </Link>
+                <Link
+                  to="/done"
+                  className="py-2 border-b-2 hover:border-primary border-black transition-all duration-200 ease-in-out  "
+                >
+                  Done
+                </Link>
               </div>
             </motion.div>
           </>
