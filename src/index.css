@@ -6,6 +6,10 @@
   --color-secondary: #6344f5;
   --color-tertiary: #ae48ff;
 }
+input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(35%) sepia(84%) saturate(1492%) hue-rotate(199deg)
+    brightness(98%) contrast(90%);
+}
 
 html {
   scroll-behavior: smooth;
@@ -33,5 +37,20 @@ html {
   }
   100% {
     background-position: 0% 0%;
+  }
+}
+
+@theme inline {
+  --animate-shine: shine var(--duration) infinite linear;
+  @keyframes shine {
+    0% {
+      background-position: 0% 0%;
+    }
+    50% {
+      background-position: 100% 100%;
+    }
+    to {
+      background-position: 0% 0%;
+    }
   }
 }

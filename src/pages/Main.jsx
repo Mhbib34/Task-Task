@@ -4,10 +4,12 @@ import Navbar from "../components/layout/Navbar";
 import React, { useRef } from "react";
 import CardTodo from "../components/fragment/CardTodo";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Main = () => {
   const waktu = new Date().getHours();
   const nama = localStorage.getItem("name");
+  const navigate = useNavigate();
   const getGreeting = () => {
     if (waktu >= 4 && waktu <= 11) return `Good Morning ${nama}`;
     if (waktu >= 12 && waktu <= 17) return `Good Afternoon ${nama}`;
@@ -38,13 +40,17 @@ const Main = () => {
             </div>
           </div>
           <div className="flex justify-between px-5 items-center gap-5 sm:w-[50%] mt-10">
-            <BarTodo icon="table-list" text="ToDo" color="primary" />
+            <BarTodo
+              icon="table-list"
+              text="ToDo"
+              color="primary"
+              onClick={() => navigate("/todo")}
+            />
             <BarTodo icon="clock" text="Progress" color="secondary" />
             <BarTodo icon="check" text="Done" color="tertiary" />
           </div>
         </div>
         <div className="flex flex-col gap-20 sm:mt-14">
-          {/* ... bagian atas tetap */}
           <div className="">
             <div className="flex justify-between items-center text-white  pr-5 md:pr-10">
               <h2 className="font-bold sm:text-2xl">Today's Task</h2>

@@ -7,11 +7,14 @@ const colorMap = {
   tertiary: "text-tertiary border-tertiary",
 };
 
-const BarTodo = ({ icon, text, color = "primary" }) => {
+const BarTodo = ({ icon, text, color = "primary", onClick }) => {
   const colorClass = colorMap[color] || colorMap["primary"];
 
   return (
-    <div className="flex flex-col items-center cursor-pointer gap-1">
+    <div
+      onClick={onClick}
+      className="flex flex-col items-center cursor-pointer gap-1 hover:animate-pulse"
+    >
       <div
         className={`h-14 w-14 border-2 rounded-full flex justify-center items-center ${colorClass}`}
       >
