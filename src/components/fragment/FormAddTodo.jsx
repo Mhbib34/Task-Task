@@ -88,14 +88,11 @@ const FormAddTodo = ({ onTaskAdded }) => {
   };
 
   return (
-    <div className="relative rounded-xl overflow-hidden">
-      <ShineBorder
-        shineColor={["#18ccfc", "#6344f5", "#ae48ff"]}
-        borderWidth={2}
-      />
+    <div className="relative rounded-xl overflow-hidden sm:w-[400px] w-[350px]">
+      <ShineBorder shineColor={["#18ccfc", "#ae48ff", "red"]} borderWidth={2} />
       <form
         onSubmit={handleSubmit}
-        className="p-4 text-white rounded shadow-md m-4"
+        className="p-5 text-white rounded shadow-md m-4"
       >
         <h2 className="text-2xl text-secondary font-bold mb-3 text-center">
           Add Task
