@@ -52,7 +52,7 @@ const Navbar = () => {
                   to="/todo"
                   className="py-2 border-b-2 hover:border-primary border-black transition-all duration-200 ease-in-out"
                 >
-                  Add Todo
+                  Todo
                 </Link>
                 <Link
                   to="/progress"

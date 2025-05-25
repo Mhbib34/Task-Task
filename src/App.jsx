@@ -10,6 +10,7 @@ import Avatar from "./pages/Avatar";
 import SplashScreen from "./components/layout/SplashScreen";
 import Main from "./pages/Main";
 import Todo from "./pages/Todo";
+import TodoAdd from "./pages/TodoAdd";
 
 function App() {
   const [showSplash, setShowSplash] = useState(false);
@@ -50,6 +51,7 @@ function App() {
         <Route path="/avatar" element={<Avatar />} />
         <Route path="/main" element={<Main />} />
         <Route path="/todo" element={<Todo />} />
+        <Route path="/todo/add" element={<TodoAdd />} />
       </Routes>
     </Router>
   );
