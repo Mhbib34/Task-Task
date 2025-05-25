@@ -8,10 +8,8 @@ import CardScroollDekstop from "../components/layout/CardScrollDekstop";
 function Todo() {
   const task = JSON.parse(localStorage.getItem("todos"));
   const navigate = useNavigate();
-
   const colorKeys = Object.keys(colorMap);
 
-  // Fungsi untuk ambil warna random
   const getRandomColor = () => {
     const randomIndex = Math.floor(Math.random() * colorKeys.length);
     return colorKeys[randomIndex];

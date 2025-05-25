@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { getThisWeekRange, getDayName } from "../../utils/dateUtils";
 import { isTimeOverlap } from "../../utils/validationUtils";
 import { ShineBorder } from "../magicui/shine-border";
+import { showAlert } from "../../utils/SweetAlert";
 
 const FormAddTodo = ({ onTaskAdded }) => {
   const [title, setTitle] = useState("");
@@ -24,17 +25,29 @@ const FormAddTodo = ({ onTaskAdded }) => {
     e.preventDefault();
 
     if (!title.trim()) {
-      alert("Judul task tidak boleh kosong.");
+      showAlert({
+        title: "Error",
+        text: "Task title is required",
+        icon: "Warning",
+      });
       return;
     }
 
     if (!startTime || !endTime) {
-      alert("Jam mulai dan selesai harus diisi.");
+      showAlert({
+        title: "Error",
+        text: "Start time and end time are required",
+        icon: "Warning",
+      });
       return;
     }
 
     if (startTime >= endTime) {
-      alert("Jam mulai harus sebelum jam selesai.");
+      showAlert({
+        title: "Error",
+        text: "Start time must be before end time",
+        icon: "Warning",
+      });
       return;
     }
 
@@ -70,12 +83,22 @@ const FormAddTodo = ({ onTaskAdded }) => {
     });
 
     if (overlapping) {
-      alert("Task bentrok dengan jadwal lain di hari yang sama!");
+      showAlert({
+        title: "Error",
+        text: "Task time overlap with another task in the same day",
+        icon: "Warning",
+      });
       return;
     }
 
     const updatedTasks = [...existingTasks, newTask];
     localStorage.setItem("todos", JSON.stringify(updatedTasks));
+
+    showAlert({
+      title: "Success",
+      text: "Task added successfully",
+      icon: "Success",
+    });
 
     // Reset form
     setTitle("");
