@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { getThisWeekRange, getDayName } from "../../utils/dateUtils";
 import { isTimeOverlap } from "../../utils/validationUtils";
 import { ShineBorder } from "../magicui/shine-border";
 import { showAlert } from "../../utils/SweetAlert";
@@ -7,19 +6,16 @@ import { showAlert } from "../../utils/SweetAlert";
 const FormAddTodo = ({ onTaskAdded }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [startTime, setStartTime] = useState("");
-  const [endTime, setEndTime] = useState("");
-  const [day, setDay] = useState(getDayName(new Date().getDay()));
+  const now = new Date();
+  const pad = (num) => String(num).padStart(2, "0");
+  const formatTime = (date) =>
+    `${pad(date.getHours())}:${pad(date.getMinutes())}`;
 
-  const days = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
-  ];
+  const defaultStart = formatTime(now);
+
+  const [startTime, setStartTime] = useState(defaultStart);
+  const [endTime, setEndTime] = useState(defaultStart);
+  const [date, setDate] = useState(new Date().toISOString().split("T")[0]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,7 +24,7 @@ const FormAddTodo = ({ onTaskAdded }) => {
       showAlert({
         title: "Error",
         text: "Task title is required",
-        icon: "Warning",
+        icon: "warning",
       });
       return;
     }
@@ -37,7 +33,7 @@ const FormAddTodo = ({ onTaskAdded }) => {
       showAlert({
         title: "Error",
         text: "Start time and end time are required",
-        icon: "Warning",
+        icon: "warning",
       });
       return;
     }
@@ -46,7 +42,7 @@ const FormAddTodo = ({ onTaskAdded }) => {
       showAlert({
         title: "Error",
         text: "Start time must be before end time",
-        icon: "Warning",
+        icon: "warning",
       });
       return;
     }
@@ -58,21 +54,16 @@ const FormAddTodo = ({ onTaskAdded }) => {
       createdAt: new Date().toISOString(),
       startTime,
       endTime,
-      day,
+      date,
       status: "todo",
     };
 
     const existingTasks = JSON.parse(localStorage.getItem("todos")) || [];
 
-    const thisWeekRange = getThisWeekRange();
     const overlapping = existingTasks.some((task) => {
-      const taskDate = new Date(task.createdAt);
-      const isSameWeek =
-        taskDate >= thisWeekRange.start && taskDate <= thisWeekRange.end;
-
+      const isSameDate = task.date === newTask.date;
       return (
-        isSameWeek &&
-        task.day === newTask.day &&
+        isSameDate &&
         isTimeOverlap(
           task.startTime,
           task.endTime,
@@ -85,8 +76,8 @@ const FormAddTodo = ({ onTaskAdded }) => {
     if (overlapping) {
       showAlert({
         title: "Error",
-        text: "Task time overlap with another task in the same day",
-        icon: "Warning",
+        text: "Task time overlaps with another task on the same date",
+        icon: "warning",
       });
       return;
     }
@@ -97,15 +88,14 @@ const FormAddTodo = ({ onTaskAdded }) => {
     showAlert({
       title: "Success",
       text: "Task added successfully",
-      icon: "Success",
+      icon: "success",
     });
 
-    // Reset form
     setTitle("");
     setDescription("");
     setStartTime("");
     setEndTime("");
-    setDay(getDayName(new Date().getDay()));
+    setDate(new Date().toISOString().split("T")[0]);
 
     if (onTaskAdded) onTaskAdded();
   };
@@ -166,18 +156,13 @@ const FormAddTodo = ({ onTaskAdded }) => {
         </div>
 
         <div className="mb-5">
-          <label className="block text-sm text-gray-600 mb-1">Day</label>
-          <select
-            value={day}
-            onChange={(e) => setDay(e.target.value)}
+          <label className="block text-sm text-gray-600 mb-1">Date</label>
+          <input
+            type="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
             className="w-full p-2 border border-secondary focus:outline-none placeholder:text-secondary text-secondary rounded bg-black"
-          >
-            {days.map((d) => (
-              <option key={d} value={d}>
-                {d}
-              </option>
-            ))}
-          </select>
+          />
         </div>
 
         <button

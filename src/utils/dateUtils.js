@@ -35,3 +35,24 @@ export const getDayName = (dayNumber) => {
       return "Monday";
   }
 };
+
+export const isToday = (dateString) => {
+  const today = new Date();
+  const date = new Date(dateString);
+  return (
+    date.getDate() === today.getDate() &&
+    date.getMonth() === today.getMonth() &&
+    date.getFullYear() === today.getFullYear()
+  );
+};
+
+export function isSameDate(dateStr, targetDateStr) {
+  const date = new Date(dateStr);
+  const target = new Date(targetDateStr);
+
+  return (
+    date.getDate() === target.getDate() &&
+    date.getMonth() === target.getMonth() &&
+    date.getFullYear() === target.getFullYear()
+  );
+}

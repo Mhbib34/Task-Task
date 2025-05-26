@@ -5,13 +5,25 @@ import { colorMap } from "../utils/colorCard";
 import { useNavigate } from "react-router-dom";
 import CardScroollDekstop from "../components/layout/CardScrollDekstop";
 import CardScrooll from "../components/layout/CardScrooll";
+import { useEffect, useState } from "react";
+import { filterTasks } from "../utils/taskUtils";
 
 const Main = () => {
+  const [countThisWeek, setCountThisWeek] = useState(0);
+  const [todayTasks, setTodayTasks] = useState([]);
+
+  useEffect(() => {
+    const allTasks = JSON.parse(localStorage.getItem("todos")) || [];
+    const tasksThisWeek = filterTasks(allTasks, "thisWeek");
+    const tasksToday = filterTasks(allTasks, "today");
+    setTodayTasks(tasksToday);
+    setCountThisWeek(tasksThisWeek.length);
+  }, []);
+
   const waktu = new Date().getHours();
   const nama = localStorage.getItem("name");
   const navigate = useNavigate();
   const colorKeys = Object.keys(colorMap);
-  const task = JSON.parse(localStorage.getItem("todos"));
   const getGreeting = () => {
     if (waktu >= 4 && waktu <= 11) return `Good Morning ${nama}`;
     if (waktu >= 12 && waktu <= 17) return `Good Afternoon ${nama}`;
@@ -24,15 +36,15 @@ const Main = () => {
     return colorKeys[randomIndex];
   };
   return (
-    <div className="md:pl-10 pl-5 pb-5 pt-10 bg-black min-h-screen">
+    <div className="md:px-10 pl-5 pb-5 pt-10 bg-black min-h-screen">
       <Navbar />
       <div className="flex flex-col gap-20">
         {/* ini main */}
-        <div className="sm:mt-32 mt-10 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-10 pr-5 md:pr-10">
+        <div className="sm:mt-32 mt-10 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-10 pr-5 ">
           <div className="text-white flex flex-col gap-2 sm:w-[50%]">
             <span className="text-gray-400 sm:text-2xl">{getGreeting()}</span>
             <h1 className="text-4xl sm:text-6xl font-bold">
-              You have {task ? task.length : 0} tasks <br />
+              You have {countThisWeek} tasks <br />
               This <span className="text-secondary">week</span>👍
             </h1>
             <div className="mt-5 sm:hidden block">
@@ -58,10 +70,13 @@ const Main = () => {
             </div>
 
             <div className="sm:hidden overflow-x-auto ">
-              <CardScrooll task={task} getRandomColor={getRandomColor} />
+              <CardScrooll task={todayTasks} getRandomColor={getRandomColor} />
             </div>
 
-            <CardScroollDekstop task={task} getRandomColor={getRandomColor} />
+            <CardScroollDekstop
+              task={todayTasks}
+              getRandomColor={getRandomColor}
+            />
           </div>
         </div>
       </div>

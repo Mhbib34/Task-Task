@@ -11,6 +11,7 @@ import SplashScreen from "./components/layout/SplashScreen";
 import Main from "./pages/Main";
 import Todo from "./pages/Todo";
 import TodoAdd from "./pages/TodoAdd";
+import "react-datepicker/dist/react-datepicker.css";
 
 function App() {
   const [showSplash, setShowSplash] = useState(false);

@@ -6,7 +6,8 @@
   --color-secondary: #6344f5;
   --color-tertiary: #ae48ff;
 }
-input[type="time"]::-webkit-calendar-picker-indicator {
+input[type="time"],
+input[type="date"]::-webkit-calendar-picker-indicator {
   filter: invert(35%) sepia(84%) saturate(1492%) hue-rotate(199deg)
     brightness(98%) contrast(90%);
 }

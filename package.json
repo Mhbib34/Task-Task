@@ -17,6 +17,7 @@
     "lucide-react": "^0.511.0",
     "motion": "^12.12.1",
     "react": "^19.1.0",
+    "react-datepicker": "^8.4.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.6.0",
     "sweetalert2": "^11.21.2",
