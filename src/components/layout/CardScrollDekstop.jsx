@@ -2,11 +2,8 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import CardTodo from "../fragment/CardTodo";
 import { useRef } from "react";
 import { MehIcon } from "lucide-react";
-const CardScroollDekstop = ({
-  task,
-
-  getRandomColor,
-}) => {
+import TaskFilterTitle from "../common/TaskFilterTitle";
+const CardScroollDekstop = ({ task, filter, filterDate, getRandomColor }) => {
   const scrollRef = useRef(null);
   const scrollLeft = () => {
     scrollRef.current.scrollBy({ left: -300, behavior: "smooth" });
@@ -17,6 +14,9 @@ const CardScroollDekstop = ({
   };
   return (
     <div className="relative hidden sm:block">
+      <div className="sm:hidden">
+        <TaskFilterTitle filter={filter} filterDate={filterDate} />
+      </div>
       {/* Tombol kiri */}
       <ArrowLeft
         onClick={scrollLeft}

@@ -3,10 +3,10 @@ import { useState } from "react";
 import BarTodo from "../components/fragment/BarTodo";
 import Navbar from "../components/layout/Navbar";
 import { colorMap } from "../utils/colorCard";
-import CardScrooll from "../components/layout/CardScrooll";
 import CardScroollDekstop from "../components/layout/CardScrollDekstop";
 import { filterTasks } from "../utils/taskUtils";
 import TaskFilter from "../components/fragment/TaskFilter";
+import CardScroollTimeline from "../components/layout/CardScroolTimeline";
 
 function Todo() {
   const [filter, setFilter] = useState("today");
@@ -25,7 +25,7 @@ function Todo() {
   };
 
   return (
-    <div className="md:px-10 pl-5 pb-5 pt-10 bg-black min-h-screen">
+    <div className="md:px-10 px-5 pb-5 pt-2 bg-black min-h-screen">
       <Navbar />
       <div className="mt-10 flex flex-col gap-10 sm:flex-row sm:items-center sm:justify-between pr-5 ">
         <BarTodo
@@ -41,21 +41,22 @@ function Todo() {
         />
       </div>
 
-      <h1 className="text-primary text-2xl font-bold mt-10">
-        {filter === "today"
-          ? "Today's Tasks"
-          : filter === "thisWeek"
-          ? "This Week's Tasks"
-          : filter === "date"
-          ? `Tasks on ${filterDate}`
-          : "All Tasks"}
-      </h1>
-
-      <div className="sm:hidden overflow-x-auto">
-        <CardScrooll task={task} getRandomColor={getRandomColor} />
+      <div className="sm:hidden">
+        <CardScroollTimeline
+          task={task}
+          filter={filter}
+          filterDate={filterDate}
+        />
       </div>
 
-      <CardScroollDekstop task={task} getRandomColor={getRandomColor} />
+      <div className="mt-10">
+        <CardScroollDekstop
+          task={task}
+          getRandomColor={getRandomColor}
+          filter={filter}
+          filterDate={filterDate}
+        />
+      </div>
     </div>
   );
 }
