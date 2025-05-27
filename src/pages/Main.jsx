@@ -35,6 +35,11 @@ const Main = () => {
     const randomIndex = Math.floor(Math.random() * colorKeys.length);
     return colorKeys[randomIndex];
   };
+
+  const handleClick = (item) => {
+    console.log(item);
+    navigate(`/todo/${item.id}`);
+  };
   return (
     <div className="md:px-10 px-5 pb-5 pt-2 bg-black min-h-screen">
       <Navbar />
@@ -74,12 +79,14 @@ const Main = () => {
                 task={todayTasks}
                 getRandomColor={getRandomColor}
                 className={`${todayTasks.length !== 0 ? "w-max" : "w-full"}`}
+                onClick={handleClick}
               />
             </div>
 
             <CardScroollDekstop
               task={todayTasks}
               getRandomColor={getRandomColor}
+              onClick={handleClick}
             />
           </div>
         </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ShineBorder } from "../magicui/shine-border";
 import { getNowTime } from "../../utils/timeUtils";
 import {
@@ -9,32 +9,58 @@ import {
 import { showAlert } from "../../utils/SweetAlert";
 import ButtonForm from "../common/ButtonForm";
 import Input from "../common/Input";
+import StatusButtons from "./StatusButton";
+import { useNavigate } from "react-router-dom";
 
-const FormAddTodo = ({ onTaskAdded }) => {
+const FormAddTodo = ({
+  onTaskAdded,
+  initialData = null,
+  onSubmit,
+  onStatusChange,
+  onClick,
+}) => {
+  const navigate = useNavigate();
   const now = getNowTime();
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [startTime, setStartTime] = useState(now.start);
-  const [endTime, setEndTime] = useState(now.end);
-  const [date, setDate] = useState(now.date);
+
+  const [title, setTitle] = useState(initialData?.title || "");
+  const [description, setDescription] = useState(
+    initialData?.description || ""
+  );
+  const [startTime, setStartTime] = useState(
+    initialData?.startTime || now.start
+  );
+  const [endTime, setEndTime] = useState(initialData?.endTime || now.end);
+  const [date, setDate] = useState(initialData?.date || now.date);
+
+  useEffect(() => {
+    if (initialData) {
+      setTitle(initialData.title || "");
+      setDescription(initialData.description || "");
+      setStartTime(initialData.startTime || now.start);
+      setEndTime(initialData.endTime || now.end);
+      setDate(initialData.date || now.date);
+    }
+    //eslint-disable-next-line
+  }, [initialData]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!validateForm({ title, startTime, endTime, date })) return;
 
-    const newTask = {
-      id: Date.now(),
+    const taskData = {
+      ...initialData,
+      id: initialData?.id || Date.now(),
       title,
       description,
-      createdAt: new Date().toISOString(),
+      createdAt: initialData?.createdAt || new Date().toISOString(),
       startTime,
       endTime,
       date,
-      status: "todo",
+      status: initialData?.status || "Todo",
     };
 
-    if (checkOverlap(newTask)) {
+    if (checkOverlap(taskData)) {
       return showAlert({
         title: "Error",
         text: "Task time overlaps with another task on the same date",
@@ -42,14 +68,19 @@ const FormAddTodo = ({ onTaskAdded }) => {
       });
     }
 
-    submitNewTask(newTask, () => {
-      setTitle("");
-      setDescription("");
-      setStartTime(now.start);
-      setEndTime(now.end);
-      setDate(now.date);
-      if (onTaskAdded) onTaskAdded();
-    });
+    if (onSubmit) {
+      onSubmit(taskData);
+    } else {
+      submitNewTask(taskData, () => {
+        setTitle("");
+        setDescription("");
+        setStartTime(now.start);
+        setEndTime(now.end);
+        setDate(now.date);
+        if (onTaskAdded) onTaskAdded();
+      });
+      navigate("/todo");
+    }
   };
 
   return (
@@ -60,7 +91,7 @@ const FormAddTodo = ({ onTaskAdded }) => {
         className="p-5 text-white rounded shadow-md m-4"
       >
         <h2 className="text-2xl text-secondary font-bold mb-3 text-center">
-          Add Task
+          {initialData ? "Update Task" : "Add Task"}
         </h2>
 
         <div className="mb-2">
@@ -114,10 +145,21 @@ const FormAddTodo = ({ onTaskAdded }) => {
         </div>
 
         <ButtonForm
-          text="Create Task"
+          text={initialData ? "Update Task" : "Create Task"}
           type="submit"
-          className="border-2 border-secondary text-secondary px-4 py-2 rounded-md cursor-pointer hover:bg-secondary hover:text-black transition-all duration-200 ease-in-out font-medium"
+          className="border-2 border-secondary text-secondary px-4 py-2 rounded-md cursor-pointer hover:bg-secondary hover:text-black transition-all duration-200 ease-in-out font-medium w-full"
         />
+        <div className={`${initialData ? "block" : "hidden"}`}>
+          <StatusButtons onStatusChange={onStatusChange} />
+        </div>
+        <div className={`${initialData ? "block" : "hidden"} mt-5`}>
+          <ButtonForm
+            onClick={onClick}
+            text="Delete"
+            type="button"
+            className="border-2 border-red-500 text-red-500 px-4 py-2 rounded-md cursor-pointer hover:bg-red-500 hover:text-black transition-all duration-200 ease-in-out font-medium w-full"
+          />
+        </div>
       </form>
     </div>
   );

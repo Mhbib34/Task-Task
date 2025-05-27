@@ -37,6 +37,9 @@ export const validateForm = ({ title, startTime, endTime, date }) => {
 export const checkOverlap = (newTask) => {
   const existingTasks = getLocalTodos();
   return existingTasks.some((task) => {
+    // 🛑 Abaikan task yang sedang di-edit (punya id yang sama)
+    if (task.id === newTask.id) return false;
+
     const isSameDate = task.date === newTask.date;
     return (
       isSameDate &&

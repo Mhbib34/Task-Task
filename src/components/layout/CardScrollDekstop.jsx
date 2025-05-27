@@ -3,7 +3,13 @@ import CardTodo from "../fragment/CardTodo";
 import { useRef } from "react";
 import { MehIcon } from "lucide-react";
 import TaskFilterTitle from "../common/TaskFilterTitle";
-const CardScroollDekstop = ({ task, filter, filterDate, getRandomColor }) => {
+const CardScroollDekstop = ({
+  task,
+  filter,
+  filterDate,
+  getRandomColor,
+  onClick,
+}) => {
   const scrollRef = useRef(null);
   const scrollLeft = () => {
     scrollRef.current.scrollBy({ left: -300, behavior: "smooth" });
@@ -51,7 +57,12 @@ const CardScroollDekstop = ({ task, filter, filterDate, getRandomColor }) => {
               .slice()
               .sort((a, b) => a.startTime.localeCompare(b.startTime))
               .map((item, index) => (
-                <CardTodo key={index} item={item} color={getRandomColor()} />
+                <CardTodo
+                  key={index}
+                  item={item}
+                  color={getRandomColor()}
+                  onClick={onClick}
+                />
               ))
           )}
         </div>

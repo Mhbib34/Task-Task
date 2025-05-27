@@ -4,7 +4,13 @@ import { Timeline } from "../ui/timeline";
 import CardTimeline from "../fragment/CardTimeline";
 import TaskFilterTitle from "../common/TaskFilterTitle";
 
-const CardScroollTimeline = ({ task, className, filter, filterDate }) => {
+const CardScroollTimeline = ({
+  task,
+  className,
+  filter,
+  filterDate,
+  onClick,
+}) => {
   return (
     <div>
       <div className={` flex gap-4 ${className} `}>
@@ -20,7 +26,7 @@ const CardScroollTimeline = ({ task, className, filter, filterDate }) => {
               .sort((a, b) => a.startTime.localeCompare(b.startTime))
               .map((item) => ({
                 title: `${item.startTime} - ${item.endTime}`,
-                content: <CardTimeline item={item} />,
+                content: <CardTimeline onClick={onClick} item={item} />,
               }))}
           >
             <TaskFilterTitle filter={filter} filterDate={filterDate} />

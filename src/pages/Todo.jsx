@@ -24,6 +24,11 @@ function Todo() {
     return colorKeys[randomIndex];
   };
 
+  const handleClick = (item) => {
+    console.log(item);
+    navigate(`/todo/${item.id}`);
+  };
+
   return (
     <div className="md:px-10 px-5 pb-5 pt-2 bg-black min-h-screen">
       <Navbar />
@@ -43,6 +48,7 @@ function Todo() {
 
       <div className="sm:hidden">
         <CardScroollTimeline
+          onClick={handleClick}
           task={task}
           filter={filter}
           filterDate={filterDate}
@@ -55,6 +61,7 @@ function Todo() {
           getRandomColor={getRandomColor}
           filter={filter}
           filterDate={filterDate}
+          onClick={handleClick}
         />
       </div>
     </div>
