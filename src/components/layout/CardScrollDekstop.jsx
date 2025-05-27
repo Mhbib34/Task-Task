@@ -49,7 +49,7 @@ const CardScroollDekstop = ({
           ) : (
             task
               .slice()
-              .reverse()
+              .sort((a, b) => a.startTime.localeCompare(b.startTime))
               .map((item, index) => (
                 <CardTodo key={index} item={item} color={getRandomColor()} />
               ))
