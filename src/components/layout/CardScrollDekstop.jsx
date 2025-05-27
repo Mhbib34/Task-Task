@@ -20,13 +20,17 @@ const CardScroollDekstop = ({
       {/* Tombol kiri */}
       <ArrowLeft
         onClick={scrollLeft}
-        className="absolute left-0 top-1/2 -translate-y-1/2 w-9 h-9 cursor-pointer text-white p-2 rounded-full z-10 shadow-black shadow-sm"
+        className={`${
+          task.length === 0 ? "hidden" : "absolute"
+        } left-0 top-1/2 -translate-y-1/2 w-9 h-9 cursor-pointer text-white p-2 rounded-full z-10 shadow-black shadow-sm`}
       />
 
       {/* Tombol kanan */}
       <ArrowRight
         onClick={scrollRight}
-        className="absolute right-0 top-1/2 -translate-y-1/2 w-9 h-9 cursor-pointer text-white p-2 rounded-full z-10 shadow-black shadow-sm"
+        className={`${
+          task.length === 0 ? "hidden" : "absolute"
+        } right-0 top-1/2 -translate-y-1/2 w-9 h-9 cursor-pointer text-white p-2 rounded-full z-10 shadow-black shadow-sm`}
       />
 
       {/* Kontainer scroll */}
@@ -34,8 +38,10 @@ const CardScroollDekstop = ({
         ref={scrollRef}
         className="overflow-x-auto mt-5 max-w-full px-12 scroll-smooth"
       >
-        <div className={`flex gap-4 ${task ? "w-max" : "w-full"} `}>
-          {!task ? (
+        <div
+          className={`flex gap-4 ${task.length !== 0 ? "w-max" : "w-full"} `}
+        >
+          {task.length === 0 ? (
             <div className="text-white mt-10 rounded-lg flex justify-center w-full gap-2 flex-col items-center">
               <MehIcon className="w-24 h-24 text-primary" />
               <span className="font-bold text-2xl text-primary">No Task</span>

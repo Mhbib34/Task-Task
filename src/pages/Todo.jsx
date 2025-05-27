@@ -14,6 +14,7 @@ function Todo() {
 
   const allTasks = JSON.parse(localStorage.getItem("todos")) || [];
   const task = filterTasks(allTasks, filter, filterDate);
+  console.log(task);
 
   const navigate = useNavigate();
   const colorKeys = Object.keys(colorMap);
@@ -40,7 +41,7 @@ function Todo() {
         />
       </div>
 
-      <h1 className="text-white text-2xl font-bold mt-10">
+      <h1 className="text-primary text-2xl font-bold mt-10">
         {filter === "today"
           ? "Today's Tasks"
           : filter === "thisWeek"

@@ -17,8 +17,8 @@ const TaskFilter = ({ filter, setFilter, filterDate, setFilterDate }) => {
         onClick={() => setFilter("today")}
         className={`px-3 py-1 rounded ${
           filter === "today"
-            ? "bg-secondary text-black"
-            : "border border-secondary text-secondary"
+            ? "bg-primary text-black"
+            : "border border-primary text-primary"
         }`}
       >
         Today
@@ -27,8 +27,8 @@ const TaskFilter = ({ filter, setFilter, filterDate, setFilterDate }) => {
         onClick={() => setFilter("thisWeek")}
         className={`px-3 py-1 rounded ${
           filter === "thisWeek"
-            ? "bg-secondary text-black"
-            : "border border-secondary text-secondary"
+            ? "bg-primary text-black"
+            : "border border-primary text-primary"
         }`}
       >
         This Week
@@ -37,8 +37,8 @@ const TaskFilter = ({ filter, setFilter, filterDate, setFilterDate }) => {
         onClick={() => setFilter("all")}
         className={`px-3 py-1 rounded ${
           filter === "all"
-            ? "bg-secondary text-black"
-            : "border border-secondary text-secondary"
+            ? "bg-primary text-black"
+            : "border border-primary text-primary"
         }`}
       >
         All
@@ -49,7 +49,7 @@ const TaskFilter = ({ filter, setFilter, filterDate, setFilterDate }) => {
         onChange={handleDateChange}
         placeholderText="Pick a date"
         dateFormat="yyyy-MM-dd"
-        className="bg-black text-secondary border border-secondary px-2 py-1 rounded placeholder:text-secondary focus:outline-none w-44 z-[99999]"
+        className="bg-black text-primary border border-primary px-2 py-1 rounded placeholder:text-primary focus:outline-none w-44 z-[99999]"
       />
     </div>
   );

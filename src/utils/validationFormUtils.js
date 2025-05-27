@@ -2,6 +2,7 @@ import { isTimeOverlap } from "./validationUtils";
 import { showAlert } from "./SweetAlert";
 import { getLocalTodos, saveLocalTodos } from "./storageUtils";
 
+//eslint-disable-next-line
 export const validateForm = ({ title, startTime, endTime, date }) => {
   if (!title.trim()) {
     showAlert({
