@@ -1,9 +1,9 @@
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, MehIcon } from "lucide-react";
 import CardTodo from "../fragment/CardTodo";
-import { useRef } from "react";
-import { MehIcon } from "lucide-react";
 import TaskFilterTitle from "../common/TaskFilterTitle";
-const CardScroollDekstop = ({
+import { useRef } from "react";
+
+const CardScrollDesktop = ({
   task,
   filter,
   filterDate,
@@ -11,19 +11,33 @@ const CardScroollDekstop = ({
   onClick,
 }) => {
   const scrollRef = useRef(null);
+
+  // Cache warna berdasarkan task.id
+  const colorMapRef = useRef({});
+
+  const getColorForTask = (id) => {
+    if (!colorMapRef.current[id]) {
+      colorMapRef.current[id] = getRandomColor();
+    }
+    return colorMapRef.current[id];
+  };
+
   const scrollLeft = () => {
-    scrollRef.current.scrollBy({ left: -300, behavior: "smooth" });
+    scrollRef.current?.scrollBy({ left: -300, behavior: "smooth" });
   };
 
   const scrollRight = () => {
-    scrollRef.current.scrollBy({ left: 300, behavior: "smooth" });
+    scrollRef.current?.scrollBy({ left: 300, behavior: "smooth" });
   };
+
   return (
     <div className="relative hidden sm:block">
+      {/* Ini muncul di mobile */}
       <div className="sm:hidden">
         <TaskFilterTitle filter={filter} filterDate={filterDate} />
       </div>
-      {/* Tombol kiri */}
+
+      {/* Tombol scroll kiri */}
       <ArrowLeft
         onClick={scrollLeft}
         className={`${
@@ -31,7 +45,7 @@ const CardScroollDekstop = ({
         } left-0 top-1/2 -translate-y-1/2 w-9 h-9 cursor-pointer text-white p-2 rounded-full z-10 shadow-black shadow-sm`}
       />
 
-      {/* Tombol kanan */}
+      {/* Tombol scroll kanan */}
       <ArrowRight
         onClick={scrollRight}
         className={`${
@@ -44,9 +58,7 @@ const CardScroollDekstop = ({
         ref={scrollRef}
         className="overflow-x-auto mt-5 max-w-full px-12 scroll-smooth"
       >
-        <div
-          className={`flex gap-4 ${task.length !== 0 ? "w-max" : "w-full"} `}
-        >
+        <div className={`flex gap-4 ${task.length !== 0 ? "w-max" : "w-full"}`}>
           {task.length === 0 ? (
             <div className="text-white mt-10 rounded-lg flex justify-center w-full gap-2 flex-col items-center">
               <MehIcon className="w-24 h-24 text-primary" />
@@ -56,11 +68,11 @@ const CardScroollDekstop = ({
             task
               .slice()
               .sort((a, b) => a.startTime.localeCompare(b.startTime))
-              .map((item, index) => (
+              .map((item) => (
                 <CardTodo
-                  key={index}
+                  key={item.id}
                   item={item}
-                  color={getRandomColor()}
+                  color={getColorForTask(item.id)}
                   onClick={onClick}
                 />
               ))
@@ -71,4 +83,4 @@ const CardScroollDekstop = ({
   );
 };
 
-export default CardScroollDekstop;
+export default CardScrollDesktop;
