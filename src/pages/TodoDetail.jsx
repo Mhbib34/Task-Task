@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import FormAddTodo from "../components/fragment/FormAddTodo";
 import { showAlert } from "../utils/SweetAlert";
 import Navbar from "../components/layout/Navbar";
@@ -9,6 +9,7 @@ function TodoDetail() {
   const todos = JSON.parse(localStorage.getItem("todos")) || [];
   const taskIndex = todos.findIndex((t) => String(t.id) === id);
   const task = todos[taskIndex];
+  const navigate = useNavigate();
 
   if (!task) return <NotFound />;
 
@@ -50,6 +51,8 @@ function TodoDetail() {
         text: "Your task has been deleted.",
         icon: "success",
       });
+
+      navigate("/main");
     }
   };
 

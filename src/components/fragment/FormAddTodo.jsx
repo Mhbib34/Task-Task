@@ -11,6 +11,7 @@ import ButtonForm from "../common/ButtonForm";
 import Input from "../common/Input";
 import StatusButtons from "./StatusButton";
 import { useNavigate } from "react-router-dom";
+import SelectedColor from "./SelectedColor";
 
 const FormAddTodo = ({
   onTaskAdded,
@@ -31,6 +32,9 @@ const FormAddTodo = ({
   );
   const [endTime, setEndTime] = useState(initialData?.endTime || now.end);
   const [date, setDate] = useState(initialData?.date || now.date);
+  const [selectedColor, setSelectedColor] = useState(
+    initialData?.color || "#ae48ff"
+  );
 
   useEffect(() => {
     if (initialData) {
@@ -39,9 +43,14 @@ const FormAddTodo = ({
       setStartTime(initialData.startTime || now.start);
       setEndTime(initialData.endTime || now.end);
       setDate(initialData.date || now.date);
+      setSelectedColor(initialData.color || "#ae48ff");
     }
     //eslint-disable-next-line
   }, [initialData]);
+
+  const handleColorSelect = (color) => {
+    setSelectedColor(color);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -57,6 +66,7 @@ const FormAddTodo = ({
       startTime,
       endTime,
       date,
+      color: selectedColor,
       status: initialData?.status || "Todo",
     };
 
@@ -77,6 +87,7 @@ const FormAddTodo = ({
         setStartTime(now.start);
         setEndTime(now.end);
         setDate(now.date);
+        setSelectedColor("#ae48ff");
         if (onTaskAdded) onTaskAdded();
       });
       navigate("/todo");
@@ -142,6 +153,24 @@ const FormAddTodo = ({
             value={date}
             onChange={(e) => setDate(e.target.value)}
           />
+        </div>
+
+        <div>
+          <label className="block text-sm text-gray-600 mb-2">
+            Select Color
+          </label>
+          <div className="flex justify-between mb-10 px-4">
+            {["#18ccfc", "#ae48ff", "#ff6f61", "red", "#fbbf24"].map(
+              (color) => (
+                <SelectedColor
+                  key={color}
+                  color={color}
+                  isSelected={selectedColor === color}
+                  onClick={() => handleColorSelect(color)}
+                />
+              )
+            )}
+          </div>
         </div>
 
         <ButtonForm
