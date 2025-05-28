@@ -14,12 +14,12 @@ const CardTimeline = ({ item, onClick }) => {
       <div className="text-white mt-5 flex justify-between">
         <span>Status</span>
         <span
-          className={`font-bold ${
+          className={`font-bold border rounded-lg px-2  ${
             item.status === "Done"
-              ? "text-green-500"
+              ? "text-green-500 border-green-500"
               : item.status === "Progress"
-              ? "text-yellow-500"
-              : "text-red-500"
+              ? "text-yellow-500 border-yellow-500"
+              : "text-red-500 border-red-500"
           }`}
         >
           {item.status}

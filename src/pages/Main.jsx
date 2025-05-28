@@ -64,7 +64,12 @@ const Main = () => {
                 color="primary"
                 onClick={() => navigate("/todo")}
               />
-              <BarTodo icon="clock" text="Progress" color="secondary" />
+              <BarTodo
+                icon="clock"
+                text="Progress"
+                color="secondary"
+                onClick={() => navigate("/progress")}
+              />
               <BarTodo
                 icon="check"
                 text="Done"

@@ -13,15 +13,15 @@ const CardTodo = ({ color = "secondary", item, onClick }) => {
       <span className="font-medium">
         {item.startTime} - {item.endTime}
       </span>
-      <div className="w-full mt-5 flex justify-between font-medium">
+      <div className="w-full mt-5 flex justify-between font-medium items-center">
         <span>Status</span>
         <span
-          className={`font-bold ${
+          className={`font-bold border-2 rounded-lg px-2 py-1 ${
             item.status === "Done"
-              ? "text-green-500"
+              ? "text-white border-green-500 bg-green-500"
               : item.status === "Progress"
-              ? "text-yellow-500"
-              : "text-red-500"
+              ? "text-white border-yellow-500 bg-yellow-500"
+              : "text-white border-red-500 bg-red-500"
           }`}
         >
           {item.status}
