@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import FormAddTodo from "../components/fragment/FormAddTodo";
 import { showAlert } from "../utils/SweetAlert";
 import Navbar from "../components/layout/Navbar";
@@ -6,23 +6,30 @@ import NotFound from "./404";
 
 function TodoDetail() {
   const { id } = useParams();
-  const navigate = useNavigate();
-
   const todos = JSON.parse(localStorage.getItem("todos")) || [];
   const taskIndex = todos.findIndex((t) => String(t.id) === id);
   const task = todos[taskIndex];
 
   if (!task) return <NotFound />;
 
-  const handleUpdate = (updatedTask) => {
+  const handleUpdate = async (updatedTask) => {
     const updatedTodos = [...todos];
     updatedTodos[taskIndex] = updatedTask;
     localStorage.setItem("todos", JSON.stringify(updatedTodos));
-    navigate("/todo");
+    await showAlert({
+      title: "Updated!",
+      text: "Your task has been updated.",
+      icon: "success",
+    });
   };
 
-  const handleStatusChange = (newStatus) => {
+  const handleStatusChange = async (newStatus) => {
     handleUpdate({ ...task, status: newStatus });
+    await showAlert({
+      title: "Completed!",
+      text: "Your task status has been updated.",
+      icon: "success",
+    });
   };
 
   const handleDelete = async () => {
@@ -43,7 +50,6 @@ function TodoDetail() {
         text: "Your task has been deleted.",
         icon: "success",
       });
-      navigate("/todo");
     }
   };
 

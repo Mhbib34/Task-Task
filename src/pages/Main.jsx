@@ -65,7 +65,12 @@ const Main = () => {
                 onClick={() => navigate("/todo")}
               />
               <BarTodo icon="clock" text="Progress" color="secondary" />
-              <BarTodo icon="check" text="Done" color="tertiary" />
+              <BarTodo
+                icon="check"
+                text="Done"
+                color="tertiary"
+                onClick={() => navigate("/done")}
+              />
             </div>
           </div>
           {/* ini card */}

@@ -13,6 +13,7 @@ import Todo from "./pages/Todo";
 import TodoAdd from "./pages/TodoAdd";
 import "react-datepicker/dist/react-datepicker.css";
 import TodoDetail from "./pages/TodoDetail";
+import Done from "./pages/Done";
 
 function App() {
   const [showSplash, setShowSplash] = useState(false);
@@ -55,6 +56,7 @@ function App() {
         <Route path="/todo" element={<Todo />} />
         <Route path="/todo/add" element={<TodoAdd />} />
         <Route path="/todo/:id" element={<TodoDetail />} />
+        <Route path="/done" element={<Done />} />
       </Routes>
     </Router>
   );
