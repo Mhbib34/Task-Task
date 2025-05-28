@@ -10,7 +10,7 @@ const Navbar = () => {
   const avatar = localStorage.getItem("avatar");
 
   return (
-    <div className="flex justify-between items-center sticky top-0 bg-transparent backdrop-blur-2xl z-50 rounded-md py-4   ">
+    <div className="flex justify-between items-center sticky top-0 bg-transparent backdrop-blur-2xl z-50 rounded-md py-4 px-5    ">
       <div onClick={() => setIsOpen(true)} className="cursor-pointer">
         <i className="fa-solid fa-bars text-2xl text-primary hover:opacity-80 transition-all duration-200 ease-in-out "></i>
       </div>

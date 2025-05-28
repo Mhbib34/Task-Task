@@ -48,16 +48,17 @@ function TodoDetail() {
   };
 
   return (
-    <div className="md:px-10 px-5 pb-5 pt-2 bg-black min-h-screen">
+    <div className="bg-black">
       <Navbar />
-
-      <div className="flex justify-center items-center mt-20">
-        <FormAddTodo
-          initialData={task}
-          onSubmit={handleUpdate}
-          onStatusChange={handleStatusChange}
-          onClick={handleDelete}
-        />
+      <div className="md:px-10 px-5 pb-5 pt-2 bg-black min-h-screen">
+        <div className="flex justify-center items-center mt-20">
+          <FormAddTodo
+            initialData={task}
+            onSubmit={handleUpdate}
+            onStatusChange={handleStatusChange}
+            onClick={handleDelete}
+          />
+        </div>
       </div>
     </div>
   );
