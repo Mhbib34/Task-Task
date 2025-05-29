@@ -5,9 +5,6 @@ import { useRef } from "react";
 
 const CardScrollDesktop = ({ task, filter, filterDate, onClick }) => {
   const scrollRef = useRef(null);
-
-  // Cache warna berdasarkan task.id
-
   const scrollLeft = () => {
     scrollRef.current?.scrollBy({ left: -300, behavior: "smooth" });
   };

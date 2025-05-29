@@ -5,7 +5,6 @@ import BarTodo from "../components/fragment/BarTodo";
 import SearchForm from "../components/common/SearchForm";
 import CardScroollDesktop from "../components/layout/CardScrollDekstop";
 import CardScrooll from "../components/layout/CardScrooll";
-import { colorMap } from "../utils/colorCard";
 import { filterTasks } from "../utils/taskUtils";
 import { useDebounce } from "../hooks/useDebounce";
 import { getLocalTodos } from "../utils/storageUtils";
@@ -20,7 +19,6 @@ const Main = () => {
   const navigate = useNavigate();
   const waktu = new Date().getHours();
   const nama = localStorage.getItem("name");
-  const colorKeys = Object.keys(colorMap);
 
   useEffect(() => {
     const allTasks = getLocalTodos();
@@ -45,11 +43,6 @@ const Main = () => {
     if (waktu >= 4 && waktu <= 11) return `Good Morning ${nama}`;
     if (waktu >= 12 && waktu <= 17) return `Good Afternoon ${nama}`;
     return `Good Evening ${nama}`;
-  };
-
-  const getRandomColor = () => {
-    const randomIndex = Math.floor(Math.random() * colorKeys.length);
-    return colorKeys[randomIndex];
   };
 
   const handleClick = (item) => {
@@ -111,7 +104,6 @@ const Main = () => {
               <div className="sm:hidden overflow-x-auto">
                 <CardScrooll
                   task={searchResults}
-                  getRandomColor={getRandomColor}
                   className={`${
                     searchResults.length !== 0 ? "w-max" : "w-full"
                   }`}
@@ -119,11 +111,7 @@ const Main = () => {
                 />
               </div>
               {/* Desktop */}
-              <CardScroollDesktop
-                task={searchResults}
-                getRandomColor={getRandomColor}
-                onClick={handleClick}
-              />
+              <CardScroollDesktop task={searchResults} onClick={handleClick} />
             </div>
           )}
 
@@ -135,17 +123,12 @@ const Main = () => {
             <div className="sm:hidden overflow-x-auto">
               <CardScrooll
                 task={todayTasks}
-                getRandomColor={getRandomColor}
                 className={`${todayTasks.length !== 0 ? "w-max" : "w-full"}`}
                 onClick={handleClick}
               />
             </div>
             {/* Desktop */}
-            <CardScroollDesktop
-              task={todayTasks}
-              getRandomColor={getRandomColor}
-              onClick={handleClick}
-            />
+            <CardScroollDesktop task={todayTasks} onClick={handleClick} />
           </div>
         </div>
       </div>

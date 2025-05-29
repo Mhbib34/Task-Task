@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import BarTodo from "../components/fragment/BarTodo";
 import Navbar from "../components/layout/Navbar";
-import { colorMap } from "../utils/colorCard";
 import CardScroollDekstop from "../components/layout/CardScrollDekstop";
 import { filterTasks } from "../utils/taskUtils";
 import TaskFilter from "../components/fragment/TaskFilter";
@@ -17,12 +16,6 @@ function Todo() {
   const task = filterTasks(allTasks, filter, filterDate);
 
   const navigate = useNavigate();
-  const colorKeys = Object.keys(colorMap);
-
-  const getRandomColor = () => {
-    const randomIndex = Math.floor(Math.random() * colorKeys.length);
-    return colorKeys[randomIndex];
-  };
 
   const handleClick = (item) => {
     navigate(`/todo/${item.id}`);
@@ -58,7 +51,6 @@ function Todo() {
         <div className="mt-10">
           <CardScroollDekstop
             task={task}
-            getRandomColor={getRandomColor}
             filter={filter}
             filterDate={filterDate}
             onClick={handleClick}

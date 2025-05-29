@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 export const showAlert = ({
   title = "Notification",
   text = "",
-  icon = "info", // success, error, warning, question
+  icon = "info",
   confirmButtonText = "OK",
   showCancelButton = false,
   cancelButtonText = "Cancel",
@@ -20,6 +20,6 @@ export const showAlert = ({
     cancelButtonText,
     timer,
     position,
-    ...rest, // bisa tambahkan option lain seperti html, input, dll
+    ...rest,
   });
 };
