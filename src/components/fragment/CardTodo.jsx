@@ -1,12 +1,11 @@
-import { colorMap } from "../../utils/colorCard";
 import React from "react";
 
-const CardTodo = ({ color = "secondary", item, onClick }) => {
-  const colorClass = colorMap[color] || colorMap["secondary"];
+const CardTodo = ({ item, onClick }) => {
   return (
     <div
       onClick={() => onClick(item)}
-      className={`text-white mt-5 ${colorClass} sm:w-[400px] w-[250px] p-4 rounded-lg flex flex-col gap-2 justify-between`}
+      style={{ backgroundColor: item.color }}
+      className={`text-white mt-5 sm:w-[400px] w-[250px] p-4 rounded-lg flex flex-col gap-2 justify-between`}
     >
       <span className="text-2xl font-bold italic">{item.title}</span>
       <p className="text-gray-100">{item.description}</p>

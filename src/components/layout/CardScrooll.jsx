@@ -2,7 +2,7 @@ import React from "react";
 import { MehIcon } from "lucide-react";
 import CardTodo from "../fragment/CardTodo";
 
-const CardScrooll = ({ task, getRandomColor, className, onClick }) => {
+const CardScrooll = ({ task, className, onClick }) => {
   return (
     <div>
       <div className={` flex gap-4 ${className} `}>
@@ -16,12 +16,7 @@ const CardScrooll = ({ task, getRandomColor, className, onClick }) => {
             .slice()
             .sort((a, b) => a.startTime.localeCompare(b.startTime))
             .map((item, index) => (
-              <CardTodo
-                key={index}
-                item={item}
-                color={getRandomColor()}
-                onClick={onClick}
-              />
+              <CardTodo key={index} item={item} onClick={onClick} />
             ))
         )}
       </div>

@@ -3,24 +3,10 @@ import CardTodo from "../fragment/CardTodo";
 import TaskFilterTitle from "../common/TaskFilterTitle";
 import { useRef } from "react";
 
-const CardScrollDesktop = ({
-  task,
-  filter,
-  filterDate,
-  getRandomColor,
-  onClick,
-}) => {
+const CardScrollDesktop = ({ task, filter, filterDate, onClick }) => {
   const scrollRef = useRef(null);
 
   // Cache warna berdasarkan task.id
-  const colorMapRef = useRef({});
-
-  const getColorForTask = (id) => {
-    if (!colorMapRef.current[id]) {
-      colorMapRef.current[id] = getRandomColor();
-    }
-    return colorMapRef.current[id];
-  };
 
   const scrollLeft = () => {
     scrollRef.current?.scrollBy({ left: -300, behavior: "smooth" });
@@ -69,12 +55,7 @@ const CardScrollDesktop = ({
               .slice()
               .sort((a, b) => a.startTime.localeCompare(b.startTime))
               .map((item) => (
-                <CardTodo
-                  key={item.id}
-                  item={item}
-                  color={getColorForTask(item.id)}
-                  onClick={onClick}
-                />
+                <CardTodo key={item.id} item={item} onClick={onClick} />
               ))
           )}
         </div>

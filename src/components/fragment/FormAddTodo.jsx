@@ -35,7 +35,6 @@ const FormAddTodo = ({
   const [selectedColor, setSelectedColor] = useState(
     initialData?.color || "#ae48ff"
   );
-
   useEffect(() => {
     if (initialData) {
       setTitle(initialData.title || "");
@@ -160,7 +159,7 @@ const FormAddTodo = ({
             Select Color
           </label>
           <div className="flex justify-between mb-10 px-4">
-            {["#18ccfc", "#ae48ff", "#ff6f61", "red", "#fbbf24"].map(
+            {["#4E342E", "#ae48ff", "#4B0082", "#0F172A", "	#064E3B"].map(
               (color) => (
                 <SelectedColor
                   key={color}
