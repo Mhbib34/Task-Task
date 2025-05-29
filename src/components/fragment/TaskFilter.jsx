@@ -1,3 +1,4 @@
+import { pad } from "../../utils/timeUtils";
 import React from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -5,7 +6,9 @@ import "react-datepicker/dist/react-datepicker.css";
 const TaskFilter = ({ filter, setFilter, filterDate, setFilterDate }) => {
   const handleDateChange = (date) => {
     if (date) {
-      const isoDate = date.toISOString().split("T")[0];
+      const isoDate = `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(
+        date.getDate()
+      )}`;
       setFilterDate(isoDate);
       setFilter("date");
     }

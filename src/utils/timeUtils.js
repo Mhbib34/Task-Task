@@ -6,9 +6,12 @@ export const formatTime = (date) =>
 export const getNowTime = () => {
   const now = new Date();
   const defaultTime = formatTime(now);
+  const localDate = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(
+    now.getDate()
+  )}`;
   return {
     start: defaultTime,
     end: defaultTime,
-    date: now.toISOString().split("T")[0],
+    date: localDate,
   };
 };
