@@ -7,14 +7,14 @@ import CardScroollDekstop from "../components/layout/CardScrollDekstop";
 import { filterTasks } from "../utils/taskUtils";
 import TaskFilter from "../components/fragment/TaskFilter";
 import CardScroollTimeline from "../components/layout/CardScroolTimeline";
+import { getLocalTodos } from "../utils/storageUtils";
 
 function Todo() {
   const [filter, setFilter] = useState("today");
   const [filterDate, setFilterDate] = useState("");
 
-  const allTasks = JSON.parse(localStorage.getItem("todos")) || [];
+  const allTasks = getLocalTodos();
   const task = filterTasks(allTasks, filter, filterDate);
-  console.log(task);
 
   const navigate = useNavigate();
   const colorKeys = Object.keys(colorMap);
@@ -25,7 +25,6 @@ function Todo() {
   };
 
   const handleClick = (item) => {
-    console.log(item);
     navigate(`/todo/${item.id}`);
   };
 

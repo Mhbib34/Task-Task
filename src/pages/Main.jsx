@@ -8,6 +8,7 @@ import CardScrooll from "../components/layout/CardScrooll";
 import { colorMap } from "../utils/colorCard";
 import { filterTasks } from "../utils/taskUtils";
 import { useDebounce } from "../hooks/useDebounce";
+import { getLocalTodos } from "../utils/storageUtils";
 
 const Main = () => {
   const [countThisWeek, setCountThisWeek] = useState(0);
@@ -16,15 +17,13 @@ const Main = () => {
   const debouncedSearch = useDebounce(search, 500);
   const [searchResults, setSearchResults] = useState([]);
 
-  console.log(searchResults);
-
   const navigate = useNavigate();
   const waktu = new Date().getHours();
   const nama = localStorage.getItem("name");
   const colorKeys = Object.keys(colorMap);
 
   useEffect(() => {
-    const allTasks = JSON.parse(localStorage.getItem("todos")) || [];
+    const allTasks = getLocalTodos();
     setCountThisWeek(filterTasks(allTasks, "thisWeek").length);
     setTodayTasks(filterTasks(allTasks, "today"));
   }, []);
@@ -35,7 +34,7 @@ const Main = () => {
       setSearchResults([]);
       return;
     }
-    const allTasks = JSON.parse(localStorage.getItem("todos")) || [];
+    const allTasks = getLocalTodos();
     const results = allTasks.filter((task) =>
       task.title.toLowerCase().includes(debouncedSearch.toLowerCase())
     );

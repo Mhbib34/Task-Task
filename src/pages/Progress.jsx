@@ -6,16 +6,12 @@ import BarTodo from "../components/fragment/BarTodo";
 import TaskFilter from "../components/fragment/TaskFilter";
 import CardScroollTimeline from "../components/layout/CardScroolTimeline";
 import CardScroollDekstop from "../components/layout/CardScrollDekstop";
-import { filterTasks } from "../utils/taskUtils";
+import { getFilterTodos } from "../utils/storageUtils";
 
 const Progress = () => {
   const [filter, setFilter] = useState("today");
   const [filterDate, setFilterDate] = useState("");
-  const allTasks = JSON.parse(localStorage.getItem("todos")) || [];
-  const task = filterTasks(allTasks, filter, filterDate);
-  const taskProgress = task.filter((t) => t.status === "Progress");
-  console.log(task);
-  console.log(taskProgress);
+  const taskProgress = getFilterTodos(filter, "Progress", filterDate);
 
   const navigate = useNavigate();
   const colorKeys = Object.keys(colorMap);
@@ -26,7 +22,6 @@ const Progress = () => {
   };
 
   const handleClick = (item) => {
-    console.log(item);
     navigate(`/todo/${item.id}`);
   };
 

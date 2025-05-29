@@ -3,10 +3,11 @@ import FormAddTodo from "../components/fragment/FormAddTodo";
 import { showAlert } from "../utils/SweetAlert";
 import Navbar from "../components/layout/Navbar";
 import NotFound from "./404";
+import { getLocalTodos } from "../utils/storageUtils";
 
 function TodoDetail() {
   const { id } = useParams();
-  const todos = JSON.parse(localStorage.getItem("todos")) || [];
+  const todos = getLocalTodos();
   const taskIndex = todos.findIndex((t) => String(t.id) === id);
   const task = todos[taskIndex];
   const navigate = useNavigate();
